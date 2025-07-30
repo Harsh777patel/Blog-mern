@@ -5,6 +5,9 @@ const multer   = require('multer');
 const fs       = require('fs');
 const path     = require('path');
 require('dotenv').config();
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 // 1️⃣ Ensure the uploads directory exists
 const uploadDir = path.join(__dirname, 'uploads');
@@ -23,15 +26,12 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 // 3️⃣ Serve images from the absolute path
 app.use('/uploads', express.static(uploadDir));
 
 // 4️⃣ Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MB_URL, {
   useNewUrlParser:    true,
   useUnifiedTopology: true
 })

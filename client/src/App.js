@@ -6,7 +6,6 @@ import Signin     from './pages/Signin';
 import Home       from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetail';  // ← import this
-
 export default function App() {
   return (
     <BrowserRouter>

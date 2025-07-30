@@ -9,8 +9,8 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get('', {
-        headers: token ? { Authorization: `Bearer ${token}` } : {}
+      .get('http://localhost:5001/api/posts', {
+        headers: token ? { Authorization: `Bearer ${token} `} : {}
       })
       .then(res => setPosts(res.data))
       .catch(console.error)
@@ -21,7 +21,7 @@ export default function Home() {
     await axios.delete(`http://localhost:5001/api/posts/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-    setPosts(p => p.filter())
+    setPosts(p => p.filter(post=> post._id !== id));
   }
 
   return (
@@ -60,7 +60,7 @@ export default function Home() {
           >
             {p.imagePath && (
               <img
-                src={`http://______fill in the blank______/uploads/${p.imagePath}`}
+                src={`http://localhost:5001/uploads/${p.imagePath}`}
                 alt={p.title}
                 style={{ width: '100%', height: 180, objectFit: 'cover' }}
               />

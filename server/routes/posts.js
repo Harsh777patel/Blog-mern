@@ -51,7 +51,7 @@ router.post('/', requireAuth, async (req, res) => {
 // UPDATE
 router.put('/:id', requireAuth, async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (!post) return res.status(404).json({ error: 'Not found' });
+  if (!post) return res.status(404).json({ error: 'Post Not found' });
   if (post.author.toString() !== req.userId)
     return res.status(403).json({ error: 'Forbidden' });
 
