@@ -20,6 +20,11 @@ export default function App() {
           <Route path="/post/:id" element={<PostDetail />} />  {/* new */}
         </Routes>
       </div>
+      <footer className="bg-dark text-white text-center py-3 mt-4">
+      <div className="container">
+        <p className="mb-0">&copy; {new Date().getFullYear()} DRAFTNEST. All rights reserved.</p>
+      </div>
+    </footer>
     </BrowserRouter>
   );
 }

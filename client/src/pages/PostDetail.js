@@ -8,7 +8,8 @@ export default function PostDetail() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    axios.get('call the api here', {
+   axios.get('http://localhost:5001/api/posts', {
+
       headers: token ? { Authorization: `earer ${token}` } : {}
     })
     .then(res => {
