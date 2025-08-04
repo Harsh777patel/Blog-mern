@@ -1,9 +1,9 @@
-const express  = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
-const cors     = require('cors');
-const multer   = require('multer');
-const fs       = require('fs');
-const path     = require('path');
+const cors = require('cors');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 const app = express();
 app.use(cors());
@@ -18,9 +18,9 @@ if (!fs.existsSync(uploadDir)) {
 // 2️⃣ Multer setup (writes into our absolute uploadDir)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
-  filename:    (req, file, cb) => {
+  filename: (req, file, cb) => {
     const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext    = file.originalname.split('.').pop();
+    const ext = file.originalname.split('.').pop();
     cb(null, `${unique}.${ext}`);
   }
 });
@@ -32,14 +32,14 @@ app.use('/uploads', express.static(uploadDir));
 
 // 4️⃣ Connect to MongoDB
 mongoose.connect(process.env.MB_URL, {
-  useNewUrlParser:    true,
+  useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB error:', err.message));
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB error:', err.message));
 
 // 5️⃣ Route mounting
-app.use('/api/auth',  require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/posts', upload.single('image'), require('./routes/posts'));
 
 // 6️⃣ Start server
